@@ -9,6 +9,8 @@ import {
 
 const url = 'https://api.github.com/graphql'
 
+const authToken = process.env.REACT_APP_GITHUB_API_TOKEN;
+
 function fetchQuery(
     operation: RequestParameters,
     variables: Variables,
@@ -17,7 +19,7 @@ function fetchQuery(
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 2b02a7b58e67cb5ddab498ea77e6c0e9d6d4c100'
+            'Authorization': `Bearer ${authToken}`
         },
         body: JSON.stringify({
             query: operation.text,

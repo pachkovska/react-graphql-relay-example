@@ -4,6 +4,7 @@ import environment from './relay-env';
 import { QueryRenderer } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
+
 const query = graphql`
   query AppQuery {
     viewer {
