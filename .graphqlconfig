@@ -1,0 +1,13 @@
+{
+  "schemaPath": "./data/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "production": {
+        "url": "https://api.github.com/graphql",
+        "headers": {
+          "Authorization": "Bearer 2b02a7b58e67cb5ddab498ea77e6c0e9d6d4c100"
+        }
+      }
+    }
+  }
+}
