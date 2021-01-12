@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import RepoList from "./RepoList";
+import RepoListWrapper from "./RepoListWrapper";
 
-export default function UserRepos() {
+export default function UserLoginInput() {
     const [login, setLogin] = useState('');
     const [sendQuery, setSendQuery] = useState(false);
 
@@ -21,7 +21,7 @@ export default function UserRepos() {
     return (
         <>
             <input ref={inputRef} type="text" value={login} onChange={(e) => setLogin(e.target.value)} onKeyUp={(e) => onPressEnter(e)}/>
-            {login && sendQuery && <RepoList login={login}/>}
+            {login && sendQuery && <RepoListWrapper login={login}/>}
         </>
     )
 }

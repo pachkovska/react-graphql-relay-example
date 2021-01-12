@@ -21,7 +21,6 @@
 .env.test.local
 .env.production.local
 .env
-.graphqlconfig
 .idea/
 
 npm-debug.log*

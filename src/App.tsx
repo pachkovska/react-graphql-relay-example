@@ -1,8 +1,8 @@
 import React from 'react';
-import UserRepos from "./components/UserRepos";
+import UserLoginInput from "./components/UserLoginInput";
 
 function App() {
-  return <UserRepos />;
+  return <UserLoginInput />;
 }
 
 export default App;
