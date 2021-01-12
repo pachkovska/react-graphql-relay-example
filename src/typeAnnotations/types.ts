@@ -5,4 +5,7 @@ export interface IRepository  {
     name: string;
     primaryLanguage: {name: string; id: string};
     id: string;
+    languages: {
+        edges: []
+    }
 }

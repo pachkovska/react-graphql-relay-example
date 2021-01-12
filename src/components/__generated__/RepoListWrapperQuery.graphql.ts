@@ -43,17 +43,44 @@ query RepoListWrapperQuery(
   }
 }
 
+fragment RepoLanguages_edges on LanguageConnection {
+  edges {
+    node {
+      color
+      id
+      name
+    }
+    size
+  }
+}
+
 fragment RepoList_repos on RepositoryConnection {
   nodes {
-    createdAt
-    isInOrganization
-    isPrivate
     name
-    primaryLanguage {
-      name
-      id
-    }
+    ...RepoSingle_node
     id
+  }
+}
+
+fragment RepoSingle_node on Repository {
+  createdAt
+  id
+  description
+  assignableUsers {
+    totalCount
+  }
+  homepageUrl
+  isInOrganization
+  isPrivate
+  name
+  owner {
+    __typename
+    avatarUrl
+    login
+    id
+  }
+  languages(first: 100, orderBy: {field: SIZE, direction: DESC}) {
+    ...RepoLanguages_edges
   }
 }
 */
@@ -73,12 +100,13 @@ v1 = [
     "variableName": "login"
   }
 ],
-v2 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 100
-  },
+v2 = {
+  "kind": "Literal",
+  "name": "first",
+  "value": 100
+},
+v3 = [
+  (v2/*: any*/),
   {
     "kind": "Literal",
     "name": "orderBy",
@@ -93,7 +121,7 @@ v2 = [
     "value": "PUBLIC"
   }
 ],
-v3 = {
+v4 = {
   "alias": null,
   "args": null,
   "concreteType": "PageInfo",
@@ -111,28 +139,28 @@ v3 = {
   ],
   "storageKey": null
 },
-v4 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "totalCount",
   "storageKey": null
 },
-v5 = {
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "totalDiskUsage",
   "storageKey": null
 },
-v6 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v7 = {
+v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -156,15 +184,15 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v2/*: any*/),
+            "args": (v3/*: any*/),
             "concreteType": "RepositoryConnection",
             "kind": "LinkedField",
             "name": "repositories",
             "plural": false,
             "selections": [
-              (v3/*: any*/),
               (v4/*: any*/),
               (v5/*: any*/),
+              (v6/*: any*/),
               {
                 "args": null,
                 "kind": "FragmentSpread",
@@ -196,15 +224,15 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v2/*: any*/),
+            "args": (v3/*: any*/),
             "concreteType": "RepositoryConnection",
             "kind": "LinkedField",
             "name": "repositories",
             "plural": false,
             "selections": [
-              (v3/*: any*/),
               (v4/*: any*/),
               (v5/*: any*/),
+              (v6/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -213,11 +241,39 @@ return {
                 "name": "nodes",
                 "plural": true,
                 "selections": [
+                  (v7/*: any*/),
                   {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
                     "name": "createdAt",
+                    "storageKey": null
+                  },
+                  (v8/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "description",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "UserConnection",
+                    "kind": "LinkedField",
+                    "name": "assignableUsers",
+                    "plural": false,
+                    "selections": [
+                      (v5/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "homepageUrl",
                     "storageKey": null
                   },
                   {
@@ -234,40 +290,117 @@ return {
                     "name": "isPrivate",
                     "storageKey": null
                   },
-                  (v6/*: any*/),
                   {
                     "alias": null,
                     "args": null,
-                    "concreteType": "Language",
+                    "concreteType": null,
                     "kind": "LinkedField",
-                    "name": "primaryLanguage",
+                    "name": "owner",
                     "plural": false,
                     "selections": [
-                      (v6/*: any*/),
-                      (v7/*: any*/)
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "avatarUrl",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "login",
+                        "storageKey": null
+                      },
+                      (v8/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v7/*: any*/)
+                  {
+                    "alias": null,
+                    "args": [
+                      (v2/*: any*/),
+                      {
+                        "kind": "Literal",
+                        "name": "orderBy",
+                        "value": {
+                          "direction": "DESC",
+                          "field": "SIZE"
+                        }
+                      }
+                    ],
+                    "concreteType": "LanguageConnection",
+                    "kind": "LinkedField",
+                    "name": "languages",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "LanguageEdge",
+                        "kind": "LinkedField",
+                        "name": "edges",
+                        "plural": true,
+                        "selections": [
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Language",
+                            "kind": "LinkedField",
+                            "name": "node",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "color",
+                                "storageKey": null
+                              },
+                              (v8/*: any*/),
+                              (v7/*: any*/)
+                            ],
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "size",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": "languages(first:100,orderBy:{\"direction\":\"DESC\",\"field\":\"SIZE\"})"
+                  }
                 ],
                 "storageKey": null
               }
             ],
             "storageKey": "repositories(first:100,orderBy:{\"direction\":\"DESC\",\"field\":\"CREATED_AT\"},privacy:\"PUBLIC\")"
           },
-          (v7/*: any*/)
+          (v8/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "0bd5a5eacccd5c560bbac8eb69e22a3b",
+    "cacheID": "4cdadcd30c65496a90adbe5a56caddb3",
     "id": null,
     "metadata": {},
     "name": "RepoListWrapperQuery",
     "operationKind": "query",
-    "text": "query RepoListWrapperQuery(\n  $login: String!\n) {\n  user(login: $login) {\n    repositories(orderBy: {field: CREATED_AT, direction: DESC}, first: 100, privacy: PUBLIC) {\n      pageInfo {\n        startCursor\n      }\n      totalCount\n      totalDiskUsage\n      ...RepoList_repos\n    }\n    id\n  }\n}\n\nfragment RepoList_repos on RepositoryConnection {\n  nodes {\n    createdAt\n    isInOrganization\n    isPrivate\n    name\n    primaryLanguage {\n      name\n      id\n    }\n    id\n  }\n}\n"
+    "text": "query RepoListWrapperQuery(\n  $login: String!\n) {\n  user(login: $login) {\n    repositories(orderBy: {field: CREATED_AT, direction: DESC}, first: 100, privacy: PUBLIC) {\n      pageInfo {\n        startCursor\n      }\n      totalCount\n      totalDiskUsage\n      ...RepoList_repos\n    }\n    id\n  }\n}\n\nfragment RepoLanguages_edges on LanguageConnection {\n  edges {\n    node {\n      color\n      id\n      name\n    }\n    size\n  }\n}\n\nfragment RepoList_repos on RepositoryConnection {\n  nodes {\n    name\n    ...RepoSingle_node\n    id\n  }\n}\n\nfragment RepoSingle_node on Repository {\n  createdAt\n  id\n  description\n  assignableUsers {\n    totalCount\n  }\n  homepageUrl\n  isInOrganization\n  isPrivate\n  name\n  owner {\n    __typename\n    avatarUrl\n    login\n    id\n  }\n  languages(first: 100, orderBy: {field: SIZE, direction: DESC}) {\n    ...RepoLanguages_edges\n  }\n}\n"
   }
 };
 })();

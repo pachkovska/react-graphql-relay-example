@@ -25,8 +25,6 @@ interface IProps {
 
 const renderQuery = ({error, props}: IProps) => {
 
-    console.log('query renderer props', props)
-
     if(error) return <div>Error!</div>;
 
     if(!props) return <div>Loading...</div>;
