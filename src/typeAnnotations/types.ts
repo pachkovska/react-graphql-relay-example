@@ -7,5 +7,6 @@ export interface IRepository  {
     id: string;
     languages: {
         edges: []
-    }
+    };
+    description?: string;
 }

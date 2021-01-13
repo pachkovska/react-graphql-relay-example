@@ -11,9 +11,12 @@ interface IProps {
 function RepoList({ repos }:IProps) {
 
         return(
-            <div>
-                {repos.nodes.map(node => <RepoSingle node={node}/>)}
-            </div>
+            <>
+                {repos.nodes.map(node => (
+                    <RepoSingle key={node.name} node={node}/>
+                    )
+                )}
+            </>
         )
 }
 

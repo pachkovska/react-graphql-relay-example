@@ -29,7 +29,10 @@ const renderQuery = ({error, props}: IProps) => {
 
     if(!props) return <div>Loading...</div>;
 
-    return <div><RepoList repos={props.user.repositories}/></div>
+    return (
+        <div className="m-8 flex flex-wrap justify-center">
+            <RepoList repos={props.user.repositories}/>
+        </div>)
 };
 
 function RepoListWrapper ({login}) {

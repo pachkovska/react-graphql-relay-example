@@ -11,7 +11,9 @@ interface IProps {
 function RepoSingle({ node }:IProps) {
 
     return(
-        <div>
+        <div className="bg-white w-1/4 min-w-24 shadow-lg rounded-lg m-2" key={node.id}>
+            <div>{node.name}</div>
+            {node.description && <div>{node.description}</div>}
             <RepoLanguages edges={node.languages} />
         </div>
     )

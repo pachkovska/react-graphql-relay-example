@@ -8,7 +8,7 @@ function RepoLanguages({ edges }:any) {
 
     return(
         <div>
-            {edges.edges.map(edge => <div>{edge.node.name}</div>)}
+            {edges.edges.map(edge => <div key={edge.node.id}>{edge.node.name}</div>)}
         </div>
     )
 }
