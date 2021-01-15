@@ -1,14 +1,20 @@
 import React from 'react';
 import { createFragmentContainer } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
-import { IRepository } from "../typeAnnotations/types";
+import Chart from './Chart';
+import { IRepositoryLanguage } from "../typeAnnotations/types";
 
+interface IProps {
+       edges: {
+           edges: IRepositoryLanguage[];
+       }
+}
 
-function RepoLanguages({ edges }:any) {
+function RepoLanguages({ edges }:IProps) {
 
     return(
-        <div>
-            {edges.edges.map(edge => <div key={edge.node.id}>{edge.node.name}</div>)}
+        <div className="flex justify-center items-center">
+            <Chart edges={edges.edges}/>
         </div>
     )
 }
