@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import RepoListWrapper from "./RepoListWrapper";
 
 export default function UserLoginInput() {
-    const [login, setLogin] = useState('');
-    const [sendQuery, setSendQuery] = useState(false);
+    const [login, setLogin] = useState<string>('');
+    const [sendQuery, setSendQuery] = useState<boolean>(false);
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         if (!login) setSendQuery(false);
